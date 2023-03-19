@@ -12,3 +12,17 @@ export const shuffleAnswers = (question) => {
         .sort((a, b) => a.sort - b.sort)
         .map((elem) => elem.value)
 }
+
+export const normalizeQuestions = (questions) => {
+    return questions.map((question) => {
+        const incorrectAnswers = question.incorrect_answers.map(
+            (incorrectAnswer) => decodeURIComponent(incorrectAnswer)
+        )
+
+        return {
+            correctAnswer: decodeURIComponent(question.correct_answer),
+            question: decodeURIComponent(question.question),
+            incorrectAnswers,
+        }
+    })
+}
