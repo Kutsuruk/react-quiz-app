@@ -1,12 +1,12 @@
 import Question from "./Question";
-import {useContext} from "react";
-import {QuizContext} from "../context/quiz";
+import { useContext } from "react";
+import { QuizContext } from "../context/quiz";
 
 const Quiz = () => {
     const [quizState, dispatch] = useContext(QuizContext)
-    console.log('questions', quizState.questions)
     const questionsLength = quizState.questions.length
     const currentQuestionIndex = quizState.currentQuestionIndex + 1
+    const correctAnswerCount = quizState.correctAnswersCount
 
     return(
         <div className='quiz'>
@@ -28,7 +28,7 @@ const Quiz = () => {
                         <div className='congratulations'>Congratulation!</div>
                         <div className='results-info'>
                             <div>You Have Completed The Quiz</div>
-                            <div>You'he Got 4 of 8</div>
+                            <div>You'he Got {correctAnswerCount} of {questionsLength}</div>
                             <div className='next-button'
                                  onClick={() => dispatch({type: 'RESTART'})}
                             >

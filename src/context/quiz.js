@@ -6,7 +6,9 @@ const initialState = {
     questions,
     currentQuestionIndex: 0,
     showResults: false,
-    answers: shuffleAnswers(questions[0])
+    answers: shuffleAnswers(questions[0]),
+    currentAnswer: '',
+    correctAnswersCount: 0
 }
 
 const reducer = (state, action) => {
@@ -21,17 +23,27 @@ const reducer = (state, action) => {
                 currentQuestionIndex,
                 showResults,
                 answers,
+                currentAnswer: ''
             }
 
         case 'RESTART':
             return initialState
+
+        case 'SELECT_ANSWER':
+            const correctAnswersCount = action.payload === state.questions[state.currentQuestionIndex].correctAnswer
+                ? state.correctAnswersCount + 1
+                : state.correctAnswersCount
+            return {
+                ...state,
+                currentAnswer:  action.payload,
+                correctAnswersCount,
+            }
 
         default: return initialState
     }
 }
 
 export const QuizContext = createContext()
-
 export const QuizProvider = ({ children }) => {
     const value = useReducer(reducer, initialState)
 
