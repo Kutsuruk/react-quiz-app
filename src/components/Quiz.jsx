@@ -10,17 +10,34 @@ const Quiz = () => {
 
     return(
         <div className='quiz'>
-            <div>
-                <div className='score'>Question {currentQuestionIndex}/{questionsLength}</div>
+            {
+                !quizState.showResults ? (
+                    <div>
+                        <div className='score'>Question {currentQuestionIndex}/{questionsLength}</div>
 
-                <Question />
+                        <Question />
 
-                <div className='next-button'
-                     onClick={() => dispatch({type: 'NEXT-QUESTION'})}
-                >
-                    Next question
-                </div>
-            </div>
+                        <div className='next-button'
+                             onClick={() => dispatch({type: 'NEXT_QUESTION'})}
+                        >
+                            Next question
+                        </div>
+                    </div>
+                ) : (
+                    <div className='results'>
+                        <div className='congratulations'>Congratulation!</div>
+                        <div className='results-info'>
+                            <div>You Have Completed The Quiz</div>
+                            <div>You'he Got 4 of 8</div>
+                            <div className='next-button'
+                                 onClick={() => dispatch({type: 'RESTART'})}
+                            >
+                                Restart Quiz
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }
