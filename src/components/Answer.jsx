@@ -2,8 +2,9 @@
 const Answer = ({ answer, onSelectAnswer, index, correctAnswer, currentAnswer }) => {
     const letters = ['A', 'B', 'C', 'D']
 
-    const isCorrectAnswer = currentAnswer && answer === correctAnswer
+    const isCorrectAnswer = currentAnswer === correctAnswer
     const isWrongAnswer = currentAnswer === answer && currentAnswer !== correctAnswer
+
     const correctAnswerClass = isCorrectAnswer ? 'correct-answer' : ''
     const wrongAnswerClass = isWrongAnswer ? 'wrong-answer' : ''
     const disabledClass = currentAnswer ? 'disabled-answer' : ''
